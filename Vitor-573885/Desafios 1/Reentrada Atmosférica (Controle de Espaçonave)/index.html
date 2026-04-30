@@ -89,34 +89,43 @@
     </div>
 
     <script>
-        const btn = document.getElementById('btnCalcular');
-        //Chamar váriavel display seguir padrão de da variavel btn
+const btn = document.getElementById('btnCalcular');
+const display = document.getElementById('resultado-logica');
 
-        //Liga o seu código HTML à ação do usuário
-        btn.addEventListener('click', () => {
-            const angulo = parseFloat(document.getElementById('anguloInput').value);
-            //Chamar váriavel escudo seguir padrão de da variavel angulo objeto (resultado-logica)
-            
-            let mensagem = "";
-            let cor = "";
-            // --- LÓGICA DE REENTRADA ---
+btn.addEventListener('click', () => {
 
-            //"#3fb950"; // Verde
-            //"#f85149"; //Vermelho
-            //"#d29922"; // Amarelo
+    const angulo = parseFloat(document.getElementById('anguloInput').value);
+    const escudo = parseFloat(document.getElementById('escudoInput').value);
 
-            // Validação de entrada: se não for número, dispara erro.
-            if (isNaN(angulo) || isNaN(escudo)) {
-                mensagem = "❌ Insira os dados da telemetria!";
-                cor = "#f85149";
-            } 
-            //Segue Continuidade da Lógica....
+    let mensagem = "";
+    let cor = "";
 
-            display.innerText = mensagem;
-            display.style.color = cor;
-            //Chamar borderColor seguir padrão display.style.color = cor;
-        });
-    </script>
+    // 🚫 VALIDAÇÃO
+    if (isNaN(angulo) || isNaN(escudo)) {
+        mensagem = "Insira os dados corretamente!";
+        cor = "#f85149";
+    } 
+    else if (escudo < 50) {
+        mensagem = "FALHA CRÍTICA: Escudo térmico comprometido!";
+        cor = "#f85149";
+    }
+    else if (angulo < 5) {
+        mensagem = "Ângulo muito baixo!";
+        cor = "#d29922";
+    } 
+    else if (angulo > 45) {
+        mensagem = "Ângulo muito alto!";
+        cor = "#f85149";
+    } 
+    else {
+        mensagem = "Reentrada bem-sucedida!";
+        cor = "#3fb950";
+    }
+
+    display.innerText = mensagem;
+    display.style.color = cor;
+});
+</script>
     
 </body>
 </html>
